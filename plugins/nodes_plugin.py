@@ -49,6 +49,9 @@ $shortname $longname / $devicemodel / $battery $voltage / $snr / $lastseen
 
         response = f"Nodes: {len(meshtastic_client.nodes)}\n"
 
+        response += "|Tag|Name|Device|Bat|Voltage|SNR|Last seen|\n"\
+                    "|:---:|:---:|:---:|---:|---:|---:|---------|\n"
+
         for node, info in meshtastic_client.nodes.items():
             if "snr" in info:
                 snr = f"{info['snr']} dB"
@@ -67,7 +70,7 @@ $shortname $longname / $devicemodel / $battery $voltage / $snr / $lastseen
                 if "batteryLevel" in info["deviceMetrics"]:
                     battery = f"{info['deviceMetrics']['batteryLevel']}%"
 
-            response += f"{info['user']['shortName']} {info['user']['longName']} / {info['user']['hwModel']} / {battery} {voltage} / {snr} / {last_heard}\n"
+            response += f"|{info['user']['shortName']}|{info['user']['longName']}|{info['user']['hwModel']}|{battery}|{voltage}|{snr}|{last_heard}|\n"
 
         return response
 
@@ -84,7 +87,7 @@ $shortname $longname / $devicemodel / $battery $voltage / $snr / $lastseen
             return False
 
         response = await self.send_matrix_message(
-            room_id=room.room_id, message=self.generate_response(), formatted=False
+            room_id=room.room_id, message=self.generate_response(), formatted=True
         )
 
         return True
