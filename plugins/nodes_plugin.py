@@ -57,7 +57,8 @@ $shortname $longname / $devicemodel / $battery $voltage / $snr / $lastseen
                 snr = f"{info['snr']} dB"
             else:
                 snr = ""
-
+            tag = str(info['user']['shortName']).replace("|","_")
+            name = str(info['user']['longName']).replace("|","_")
             last_heard = None
             if "lastHeard" in info:
                 last_heard = get_relative_time(info["lastHeard"])
@@ -70,7 +71,7 @@ $shortname $longname / $devicemodel / $battery $voltage / $snr / $lastseen
                 if "batteryLevel" in info["deviceMetrics"]:
                     battery = f"{info['deviceMetrics']['batteryLevel']}%"
 
-            response += f"|{info['user']['shortName']}|{info['user']['longName']}|{info['user']['hwModel']}|{battery}|{voltage}|{snr}|{last_heard}|\n"
+            response += f"|{tag}|{name}|{info['user']['hwModel']}|{battery}|{voltage}|{snr}|{last_heard}|\n"
 
         return response
 
