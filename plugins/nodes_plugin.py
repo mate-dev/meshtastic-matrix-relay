@@ -6,17 +6,12 @@ from datetime import datetime
 def get_relative_time(timestamp):
     now = datetime.now()
     dt = datetime.fromtimestamp(timestamp)
-
-    # Calculate the time difference between the current time and the given timestamp
     delta = now - dt
-
-    # Extract the relevant components from the time difference
     days = delta.days
     seconds = delta.seconds
 
-    # Convert the time difference into a relative timeframe
     if days > 7:
-        return dt.strftime("%b %d, %Y") # Return the timestamp in a specific format if it's older than 7 days
+        return dt.strftime("%b %d, %Y")
     elif days >= 1:
         return f"{days} days ago"
     elif seconds >= 3600:
@@ -42,8 +37,8 @@ $shortname $longname / $devicemodel / $battery $voltage / $snr / $lastseen
         from meshtastic_utils import connect_meshtastic
 
         meshtastic_client = connect_meshtastic()
-        
-        response = f"Nodes: {len(meshtastic_client.nodes)}\n"
+
+        response = f">**Nodes: {len(meshtastic_client.nodes)}**\n\n"
 
         for node, info in meshtastic_client.nodes.items():
             snr = ""
@@ -61,8 +56,11 @@ $shortname $longname / $devicemodel / $battery $voltage / $snr / $lastseen
                     voltage = f"{info['deviceMetrics']['voltage']}V "
                 if "batteryLevel" in info["deviceMetrics"] and info["deviceMetrics"]["batteryLevel"] is not None:
                     battery = f"{info['deviceMetrics']['batteryLevel']}% "
-            
-            response += f"{info['user']['shortName']} {info['user']['longName']} / {info['user']['hwModel']} / {battery} {voltage} / {snr} / {last_heard}\n"
+
+            response += f"><hr/>\n\n"\
+                        f">**[{info['user']['shortName']} - {info['user']['longName']}]**\n"\
+                        f">{info['user']['hwModel']} {battery}{voltage}\n"\
+                        f">{snr}{last_heard}\n\n"
 
         return response
 
@@ -77,7 +75,7 @@ $shortname $longname / $devicemodel / $battery $voltage / $snr / $lastseen
             return False
 
         response = await self.send_matrix_message(
-            room_id=room.room_id, message=self.generate_response(), formatted=False
+            room_id=room.room_id, message=self.generate_response(), formatted=True
         )
 
         return True
