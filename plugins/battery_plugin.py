@@ -15,16 +15,16 @@ def load_env_variable(key):
     return None
 
 class Plugin(BasePlugin):
-    plugin_name = "chutilz"
+    plugin_name = "battery"
 
     @property
     def description(self):
-        return "Generates and returns Channels utilization."
+        return "Generates and returns Battery Level."
 
     async def get_image_url(self):
         base_url = load_env_variable('GRAFANA_BASE_URL')
         org_id = "1"
-        panel_id = "3"
+        panel_id = "1"
         width = "1200"
         height = "600"
         scale = "1"
