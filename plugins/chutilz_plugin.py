@@ -22,7 +22,7 @@ class Plugin(BasePlugin):
         return "Generates and returns Channels utilization."
 
     async def get_image_url(self):
-        base_url = "http://172.18.0.1:3000/render/d-solo/fdr9ym4rdfhmoa/loramesh"
+        base_url = load_env_variable('GRAFANA_BASE_URL')
         org_id = "1"
         panel_id = "3"
         width = "1000"
