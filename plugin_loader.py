@@ -17,6 +17,11 @@ def load_plugins():
     from plugins.drop_plugin import Plugin as DropPlugin
     from plugins.debug_plugin import Plugin as DebugPlugin
     from plugins.chutilz_plugin import Plugin as ChutilzPlugin
+    from plugins.airutilz_plugin import Plugin as AirutilzPlugin
+    from plugins.voltage_plugin import Plugin as VoltagePlugin
+    from plugins.battery_plugin import Plugin as BatteryPlugin
+    from plugins.snr_plugin import Plugin as SNRPlugin
+
 
     global sorted_active_plugins
     if sorted_active_plugins:
@@ -34,6 +39,13 @@ def load_plugins():
         DropPlugin(),
         DebugPlugin(),
         ChutilzPlugin(),
+        AirutilzPlugin(),
+        VoltagePlugin(),
+        BatteryPlugin(),
+        SNRPlugin(),
+
+
+
     ]
 
     active_plugins = []
