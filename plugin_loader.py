@@ -16,6 +16,7 @@ def load_plugins():
     from plugins.nodes_plugin import Plugin as NodesPlugin
     from plugins.drop_plugin import Plugin as DropPlugin
     from plugins.debug_plugin import Plugin as DebugPlugin
+    from plugins.chutilz_plugin import Plugin as ChutilzPlugin
 
     global sorted_active_plugins
     if sorted_active_plugins:
@@ -32,6 +33,7 @@ def load_plugins():
         NodesPlugin(),
         DropPlugin(),
         DebugPlugin(),
+        ChutilzPlugin(),
     ]
 
     active_plugins = []
@@ -47,3 +49,4 @@ def load_plugins():
 
     sorted_active_plugins = sorted(active_plugins, key=lambda plugin: plugin.priority)
     return sorted_active_plugins
+
