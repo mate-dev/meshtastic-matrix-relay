@@ -27,7 +27,7 @@ class Plugin(BasePlugin):
         panel_id = "1"
         width = "1200"
         height = "600"
-        scale = "1"
+        scale = "2"
         tz = "Europe/Warsaw"
 
         to_time = int(time.time() * 1000)
